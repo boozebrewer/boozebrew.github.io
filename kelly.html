@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <html>
-<head>
+<!-- <head>
   <title>Bitcoin Price</title>
 </head>
 <body>
@@ -36,10 +36,11 @@
     updatePrice();
   </script>
 </body>
-
+ -->
 <head>
   <title>Fractional Kelly Bitcoin Investment Calculator</title>
 </head>
+
 <body>
   <h1>Fractional Kelly Bitcoin Investment Calculator</h1>
   <p>
@@ -54,51 +55,58 @@
     <input type="range" min="0" max="1" step="0.01" value="0.6" id="probability_of_profit" name="probability_of_profit" oninput="updateProbabilityOfProfitValue(this.value)">
     <span id="probability_of_profit_value">0.6</span>
     <br>
-    <span>The probability that you will make a profit on each investment</span>
+    <span>The probability that you will make a profit</span>
   </p>
   <p>
-    <label for="profit_amount">Profit Amount:</label><br>
-    <input type="range" min="0" max="10" step="0.1" value="2" id="profit_amount" name="profit_amount" oninput="updateProfitAmountValue(this.value)">
-    <span id="profit_amount_value">2</span>
-    <span>The amount that you will make in profit if the investment is successful</span>
+    <label for="profit_amount">Profit Percent:</label><br>
+    <input type="range" min="0" max="1" step="0.01" value="0.1" id="profit_amount" name="profit_amount" oninput="updateProfitAmountValue(this.value)">
+    <span id="profit_amount_value">0.1</span>
+    <span>What percent might bitcoin go up?</span>
   </p>
   <p>
-    <label for="loss_amount">Loss Amount:</label><br>
-    <input type="range" min="0" max="10" step="0.1" value="1" id="loss_amount" name="loss_amount" oninput="updateLossAmountValue(this.value)">
-    <span id="loss_amount_value">1</span>
+    <label for="loss_amount">Loss Percent:</label><br>
+    <input type="range" min="0" max="1" step="0.01" value="0.1" id="loss_amount" name="loss_amount" oninput="updateLossAmountValue(this.value)">
+    <span id="loss_amount_value">0.1</span>
     <br>
-    <span>The amount that you will lose if the investment is unsuccessful</span>
+    <span>What percent might bitcoin go down?</span>
   </p>
   <p>
     <label for="risk_tolerance">Risk Tolerance:</label><br>
     <input type="range" min="0" max="1" step="0.01" value="0.5" id="risk_tolerance" name="risk_tolerance" oninput="updateRiskToleranceValue(this.value)">
     <span id="risk_tolerance_value">0.5</span>
     <br>
-    <span>Your tolerance for risk, with a value of 0 representing a low tolerance and a value of 1 representing a high tolerance</span>
+    <span>Your tolerance for risk</span>
   </p>
   <button onclick="calculateInvestment()">Calculate Investment Amount</button>
   <br>
   <p>Investment Amount: <span id="investment_amount"></span></p>
   
   <script>
+    
+
     function updateCapitalValue(value) {
       document.getElementById("capital_value").innerHTML = value;
+      calculateInvestment();
     }
     
     function updateProbabilityOfProfitValue(value) {
       document.getElementById("probability_of_profit_value").innerHTML = value;
+      calculateInvestment();
     }
     
     function updateProfitAmountValue(value) {
       document.getElementById("profit_amount_value").innerHTML = value;
+      calculateInvestment();
     }
     
     function updateLossAmountValue(value) {
       document.getElementById("loss_amount_value").innerHTML = value;
+      calculateInvestment();
     }
     
     function updateRiskToleranceValue(value) {
       document.getElementById("risk_tolerance_value").innerHTML = value;
+      calculateInvestment();
     }
     
     function calculateInvestment() {
@@ -110,13 +118,14 @@
       var risk_tolerance = document.getElementById("risk_tolerance").value;
       
       // calculate investment amount
-      var fraction_to_invest = (probability_of_profit * profit_amount - loss_amount) / profit_amount;
+      var fraction_to_invest = probability_of_profit / loss_amount - (1-probability_of_profit) / profit_amount;
       fraction_to_invest *= risk_tolerance;
       var investment_amount = capital * fraction_to_invest;
       
       // update the investment amount on the page
       document.getElementById("investment_amount").innerHTML = investment_amount.toFixed(2);
     }
+    calculateInvestment();
   </script>
   <a href="https://en.wikipedia.org/wiki/Kelly_criterion" target="_blank">Learn more about the Kelly criterion</a>
 
