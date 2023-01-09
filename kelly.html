@@ -1,45 +1,19 @@
 
 <!DOCTYPE html>
 <html>
-<!-- <head>
-  <title>Bitcoin Price</title>
-</head>
-<body>
-  <p>Current Bitcoin Price: <span id="bitcoin_price"></span></p>
-  
-  <script>
-    const API_KEY = "09d72610-3d3b-4c91-b176-757c254dc012";
-    const API_URL = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest";
-    
-    async function getPrice() {
-      const response = await fetch(API_URL, {
-        method: "GET",
-        headers: {
-          "X-CMC_PRO_API_KEY": API_KEY
-        },
-        params: {
-          start: "1",
-          limit: "1",
-          convert: "USD"
-        }
-      });
-      const data = await response.json();
-      const price = data.data[0].quote.USD.price;
-      return price;
-    }
-    
-    async function updatePrice() {
-      const price = await getPrice();
-      document.getElementById("bitcoin_price").innerHTML = price;
-    }
-    
-    updatePrice();
-  </script>
-</body>
- -->
+
 <head>
   <title>Fractional Kelly Bitcoin Investment Calculator</title>
 </head>
+<style>
+    input[type="range"] {
+      height: 10px;
+      width: 400px;
+    }
+    label {
+      font-size: 25px;
+    }
+</style>
 
 <body>
   <h1>Fractional Kelly Bitcoin Investment Calculator</h1>
@@ -55,14 +29,14 @@
     <input type="range" min="0" max="1" step="0.01" value="0.6" id="probability_of_profit" name="probability_of_profit" oninput="updateProbabilityOfProfitValue(this.value)">
     <span id="probability_of_profit_value">0.6</span>
     <br>
-    <span>The probability that bitboin will go up profit percent</span>
+    <span>The probability that bitcoin will go up</span>
   </p>
   <p>
     <label for="profit_amount">Profit Percent:</label><br>
     <input type="range" min="0" max="1" step="0.01" value="0.1" id="profit_amount" name="profit_amount" oninput="updateProfitAmountValue(this.value)">
     <span id="profit_amount_value">0.1</span>
     <br>
-    <span>What percent might bitcoin go up?</span>
+    <span>What percent might bitcoin go up with the above probability?</span>
   </p>
   <p>
     <label for="loss_amount">Loss Percent:</label><br>
@@ -78,7 +52,7 @@
     <br>
     <span>Your tolerance for risk</span>
   </p>
-  <button onclick="calculateInvestment()">Calculate Investment Amount</button>
+  <!-- <button onclick="calculateInvestment()">Calculate Investment Amount</button> -->
   <br>
   <p>Investment Amount: <span id="investment_amount"></span></p>
   
@@ -133,3 +107,8 @@
 
 </body>
 </html>
+
+
+
+
+
