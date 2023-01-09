@@ -1,2 +1,2 @@
-# boozebrewer.github.io/kelly.html
-Web page
+# boozebrewer.github.io
+<https://boozebrewer.github.io/kelly.html>
